@@ -1,0 +1,110 @@
+:root {
+  font-family: 'Crimson Text', 'Times New Roman', Georgia, serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  /* Paleta Dark Souls */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1410;
+  --bg-tertiary: #2a1f1a;
+  --text-primary: #d4c5b9;
+  --text-secondary: #8a7d72;
+  --accent-fire: #ff6b35;
+  --accent-ember: #ffa500;
+  --accent-gold: #d4af37;
+  --border-dark: #3a2f2a;
+  --shadow: rgba(0, 0, 0, 0.8);
+
+  color-scheme: dark;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  font-weight: 500;
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+}
+a:hover {
+  color: var(--accent-ember);
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-gold);
+  text-shadow: 0 2px 10px var(--shadow);
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 4px;
+  border: 2px solid var(--border-dark);
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: inherit;
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 6px var(--shadow);
+}
+button:hover {
+  border-color: var(--accent-fire);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+  transform: translateY(-2px);
+}
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Scrollbar estilo Dark Souls */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-fire) 0%, var(--accent-ember) 100%);
+  border-radius: 6px;
+  border: 2px solid var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-ember) 0%, var(--accent-gold) 100%);
+}
