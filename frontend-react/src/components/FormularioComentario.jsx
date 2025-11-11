@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import api from '../services/api.js';
 import { useState, useEffect } from 'react';
 import { getErrorMessage } from '../utils/errorMessages';
 import './FormularioComentario.css';
@@ -17,7 +17,7 @@ export default function FormularioComentario({ publicacionId, onComentarioCreado
     try {
       // Enviar solo nombre, correo y cuerpo (sin usuarioId)
       const { nombre, correo, cuerpo } = data;
-      const response = await axios.post(`http://localhost:4000/api/publicaciones/${publicacionId}/comentarios`, {
+      const response = await api.post(`/publicaciones/${publicacionId}/comentarios`, {
         nombre,
         correo,
         cuerpo

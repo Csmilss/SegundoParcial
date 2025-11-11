@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../services/api.js';
 import Cargando from '../components/Cargando';
 import FormularioPublicacion from '../components/FormularioPublicacion';
 import PublicacionCard from '../components/PublicacionCard';
@@ -20,11 +20,11 @@ function Publicaciones() {
   const fetchData = async () => {
     try {
       // Obtener datos del usuario
-      const usuarioResponse = await axios.get(`http://localhost:4000/api/usuarios/${id}`);
+      const usuarioResponse = await api.get(`/usuarios/${id}`);
       setUsuario(usuarioResponse.data);
 
       // Obtener publicaciones del usuario
-      const publicacionesResponse = await axios.get(`http://localhost:4000/api/usuarios/${id}/publicaciones`);
+      const publicacionesResponse = await api.get(`/usuarios/${id}/publicaciones`);
       setPublicaciones(publicacionesResponse.data);
       setPublicacionesFiltradas(publicacionesResponse.data);
       setLoading(false);

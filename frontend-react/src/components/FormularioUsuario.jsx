@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import api from '../services/api.js';
 import { useState } from 'react';
 import { getErrorMessage } from '../utils/errorMessages';
 import './FormularioUsuario.css';
@@ -15,7 +15,7 @@ export default function FormularioUsuario({ onUsuarioCreado }) {
     setMensaje(null);
     
     try {
-      const response = await axios.post('http://localhost:4000/api/usuarios', data);
+      const response = await api.post('/usuarios', data);
       setMensaje({ tipo: 'exito', texto: `✅ ¡Guerrero ${data.nombre} registrado exitosamente!` });
       reset();
       

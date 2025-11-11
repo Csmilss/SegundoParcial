@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api.js';
 import Cargando from '../components/Cargando';
 import UsuarioCard from '../components/UsuarioCard';
 import FormularioUsuario from '../components/FormularioUsuario';
@@ -14,7 +14,7 @@ function Usuarios() {
 
   const fetchUsuarios = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/usuarios');
+      const response = await api.get('/usuarios');
       setUsuarios(response.data);
       setLoading(false);
     } catch (err) {

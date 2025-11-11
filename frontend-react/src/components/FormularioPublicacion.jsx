@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import api from '../services/api.js';
 import { useState, useEffect } from 'react';
 import { getErrorMessage } from '../utils/errorMessages';
 import './FormularioPublicacion.css';
@@ -15,7 +15,7 @@ export default function FormularioPublicacion({ onPublicacionCreada }) {
   useEffect(() => {
     const cargarUsuarios = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/usuarios');
+        const response = await api.get('/usuarios');
         setUsuarios(response.data);
       } catch (error) {
         console.error('Error al cargar usuarios:', error);
@@ -31,7 +31,7 @@ export default function FormularioPublicacion({ onPublicacionCreada }) {
     setMensaje(null);
     
     try {
-      const response = await axios.post('http://localhost:4000/api/publicaciones', {
+      const response = await api.post('/publicaciones', {
         ...data,
         usuarioId: parseInt(data.usuarioId)
       });

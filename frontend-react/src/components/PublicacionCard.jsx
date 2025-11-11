@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api.js';
 import FormularioComentario from './FormularioComentario';
 import ModalConfirmacion from './ModalConfirmacion';
 import './PublicacionCard.css';
@@ -16,7 +16,7 @@ export default function PublicacionCard({ publicacion }) {
   useEffect(() => {
     const cargarCantidad = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/publicaciones/${publicacion.id}/comentarios`);
+        const response = await api.get(`/publicaciones/${publicacion.id}/comentarios`);
         setCantidadComentarios(response.data.length);
       } catch (error) {
         console.error('Error al cargar cantidad de comentarios:', error);
@@ -29,7 +29,7 @@ export default function PublicacionCard({ publicacion }) {
     if (comentarios.length === 0 && !cargandoComentarios) {
       setCargandoComentarios(true);
       try {
-        const response = await axios.get(`http://localhost:4000/api/publicaciones/${publicacion.id}/comentarios`);
+        const response = await api.get(`/publicaciones/${publicacion.id}/comentarios`);
         setComentarios(response.data);
         setCantidadComentarios(response.data.length);
       } catch (error) {
@@ -59,7 +59,7 @@ export default function PublicacionCard({ publicacion }) {
 
   const confirmarEliminacion = async () => {
     try {
-      await axios.delete(`http://localhost:4000/api/comentarios/${comentarioAEliminar}`);
+      await api.delete(`/comentarios/${comentarioAEliminar}`);
       // Actualizar la lista de comentarios
       setComentarios(comentarios.filter(c => c.id !== comentarioAEliminar));
       setCantidadComentarios(cantidadComentarios - 1);
