@@ -1,28 +1,25 @@
-
-
 import { Router } from 'express';
-import { Comentario } from '../models/Comentario.js';
-import { notFound } from '../middlewares/errorHandler.js';
+
+// Importamos el modelo
+import Comentario from '../models/Comentario.js';
 
 const router = Router();
 
-// DELETE /api/comentarios/:id - Eliminar comentario
-router.delete('/:id', async (req, res, next) => {
-    try {
-        const { id } = req.params;
-        
-        const comentario = await Comentario.findByPk(id);
-        
-        if (!comentario) {
-            throw notFound('Comentario no encontrado');
-        }
-        
-        await comentario.destroy();
-        
-        res.status(204).send();
-    } catch (error) {
-        next(error);
+// DELETE /api/comentarios/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    const comentario = await Comentario.findByPk(req.params.id);
+    if (!comentario) {
+      return res.status(404).json({ error: true, mensaje: 'Comentario no encontrado' });
     }
+
+    await comentario.destroy();
+    
+    res.status(200).json({ mensaje: 'Comentario eliminado correctamente' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: true, mensaje: 'Error al eliminar el comentario' });
+  }
 });
 
 export default router;

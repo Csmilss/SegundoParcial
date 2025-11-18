@@ -1,47 +1,49 @@
-import { DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { DataTypes } from 'sequelize';
+import sequelize from '../db.js'; // Importamos la conexión (con .js)
 
-export const Publicacion = sequelize.define('Publicacion', {
+const Publicacion = sequelize.define(
+  'Publicacion',
+  {
+    // Atributos 
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
     titulo: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "El título no puede estar vacío" },
+      }
     },
     cuerpo: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-        validate: {
-            notEmpty: true
-        }
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: { msg: "El cuerpo no puede estar vacío" },
+      }
     },
     usuarioId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'usuarios',
-            key: 'id'
-        }
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
-}, {
-    tableName: 'publicaciones',
-    timestamps: true
-});
+  },
+  {
+    // Opciones 
+    timestamps: false,
+    tableName: 'Publicaciones',
+    hooks: {
+      beforeValidate: (publicacion) => {
+        if (typeof publicacion.titulo === "string") {
+          publicacion.titulo = publicacion.titulo.trim();
+        }
+        if (typeof publicacion.cuerpo === "string") {
+          publicacion.cuerpo = publicacion.cuerpo.trim();
+        }
+      },
+    }
+  }
+);
 
-// Relaciones
-Publicacion.associate = (models) => {
-    Publicacion.belongsTo(models.Usuario, {
-        foreignKey: 'usuarioId',
-        as: 'usuario'
-    });
-    Publicacion.hasMany(models.Comentario, {
-        foreignKey: 'publicacionId',
-        as: 'comentarios'
-    });
-};
+export default Publicacion;

@@ -1,25 +1,22 @@
 import { Link } from 'react-router-dom';
-import './UsuarioCard.css';
+import '../styles/UsuarioCard.css'; 
 
 function UsuarioCard({ usuario }) {
-    return (
-        <div className="usuario-card">
-            <div className="usuario-avatar">
-                {usuario.nombre.charAt(0).toUpperCase()}
-            </div>
-            <div className="usuario-info">
-                <h3 className="usuario-nombre">{usuario.nombre}</h3>
-                <p className="usuario-correo">✉️ {usuario.correo}</p>
-                <p className="usuario-ciudad">📍 {usuario.ciudad}</p>
-            </div>
-            <Link 
-                to={`/usuarios/${usuario.id}/publicaciones`} 
-                className="btn-publicaciones"
-            >
-                📜 Ver Crónicas de Batalla
-            </Link>
-        </div>
-    );
+  // Recibimos un 'usuario' por props
+  return (
+    <div className="card">
+      <div className="card-body">
+        <h5 className="card-title">{usuario.nombre}</h5>
+        <p className="card-text">Correo: {usuario.correo}</p>
+        <p className="card-text">Ciudad: {usuario.ciudad}</p>
+        <Link 
+          to={`/usuarios/${usuario.id}/publicaciones`} 
+          className="card-button"
+        >
+          Ver Publicaciones
+        </Link>
+      </div>
+    </div>
+  );
 }
-
 export default UsuarioCard;

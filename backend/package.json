@@ -5,8 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "node --watch src/app.js",
-    "seed": "node src/seed.js",
+    "dev": "nodemon src/app.js", 
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,5 +17,8 @@
     "express": "^5.1.0",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
