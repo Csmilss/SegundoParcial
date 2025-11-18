@@ -1,0 +1,76 @@
+.usuario-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error-msg {
+  color: red;
+  font-size: 0.9em;
+}
+
+.form-buttons {
+  margin-top: 20px;
+}
+
+.btn-guardar {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-cancelar {
+  background-color: #6c757d;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-nuevo {
+  background-color: #142759;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn-nuevo:hover {
+  background-color: #1f3a8a;
+}
+
+.nuevo-usuario-control {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

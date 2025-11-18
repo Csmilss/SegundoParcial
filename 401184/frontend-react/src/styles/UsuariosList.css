@@ -1,0 +1,60 @@
+.usuarios-container {
+  padding: 20px;
+}
+
+.usuarios-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+}
+
+.error-mensaje {
+  color: red;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+.paginacion-controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.paginacion-controles button {
+  background-color: #142759; 
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.paginacion-controles button:hover {
+  background-color: #1f3a8a;
+}
+
+.paginacion-controles button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paginacion-controles span {
+  font-weight: bold;
+}
+
+.alerta-info {
+  background-color: #e2e3e5;
+  color: #383d41;
+  border: 1px solid #d6d8db;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+}

@@ -1,0 +1,79 @@
+.detalle-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.detalle-post {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.detalle-post h1 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.post-cuerpo {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  white-space: pre-wrap; 
+  color: #333;
+}
+
+
+.detalle-comentarios h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.comentario-item {
+  background-color: #ffffff;
+  border: 1px solid #eee;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.comentario-item strong {
+  color: #142759; 
+}
+
+.comentario-item p {
+  margin-top: 5px;
+  margin-bottom: 0;
+  color: #555;
+}
+
+.alerta-info {
+  background-color: #e2e3e5;
+  color: #383d41;
+  border: 1px solid #d6d8db;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.comentario-item {
+  position: relative; 
+}
+
+.btn-borrar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #aaa;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+}
+.btn-borrar:hover {
+  color: #d9534f; 
+}
