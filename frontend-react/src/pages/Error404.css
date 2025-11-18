@@ -1,0 +1,174 @@
+.error404-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  color: white;
+  padding: 2rem;
+}
+
+.bonfire-scene {
+  text-align: center;
+  max-width: 600px;
+}
+
+/* Hoguera animada */
+.bonfire {
+  position: relative;
+  width: 100px;
+  height: 120px;
+  margin: 0 auto 3rem;
+}
+
+.logs {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 20px;
+  background: linear-gradient(to bottom, #4a2511 0%, #2d1508 100%);
+  border-radius: 10px;
+}
+
+.logs::before,
+.logs::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(to bottom, #4a2511 0%, #2d1508 100%);
+  border-radius: 5px;
+}
+
+.logs::before {
+  width: 60px;
+  height: 15px;
+  top: -8px;
+  left: 10px;
+  transform: rotate(-15deg);
+}
+
+.logs::after {
+  width: 60px;
+  height: 15px;
+  top: -8px;
+  right: 10px;
+  transform: rotate(15deg);
+}
+
+.flame {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 60px;
+  background: linear-gradient(to top, #ff6b00 0%, #ff9500 40%, #ffb800 70%, #fff200 100%);
+  border-radius: 50% 50% 0 0;
+  animation: flicker 1.5s infinite;
+  filter: blur(2px);
+}
+
+.flame1 {
+  animation-delay: 0s;
+  z-index: 3;
+}
+
+.flame2 {
+  animation-delay: 0.3s;
+  width: 35px;
+  height: 55px;
+  left: 45%;
+  z-index: 2;
+}
+
+.flame3 {
+  animation-delay: 0.6s;
+  width: 25px;
+  height: 50px;
+  left: 55%;
+  z-index: 1;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    transform: translateX(-50%) scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(-50%) scaleY(1.1) scaleX(0.9);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(-50%) scaleY(0.9) scaleX(1.1);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(-50%) scaleY(1.05) scaleX(0.95);
+    opacity: 0.95;
+  }
+}
+
+/* Contenido del error */
+.souls-title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #8b0000;
+  margin-bottom: 1rem;
+  text-shadow: 
+    0 0 10px rgba(139, 0, 0, 0.8),
+    0 0 20px rgba(139, 0, 0, 0.6),
+    0 0 30px rgba(139, 0, 0, 0.4);
+  font-family: serif;
+  letter-spacing: 0.2rem;
+}
+
+.error-code {
+  font-size: 1.5rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  font-size: 1.3rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.souls-message {
+  color: #999;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.actions {
+  margin-top: 2rem;
+}
+
+.btn-respawn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #ff6b00 0%, #ff9500 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+}
+
+.btn-respawn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  .souls-title {
+    font-size: 3rem;
+  }
+  
+  .error-message {
+    font-size: 1.1rem;
+  }
+}
