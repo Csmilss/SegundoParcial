@@ -34,7 +34,7 @@
   margin-top: 20px;
 }
 .btn-guardar {
-  background-color: #28a745;
+  background-color: var(--color-secundario);
   color: white;
   padding: 10px 15px;
   border: none;
@@ -44,4 +44,7 @@
 .btn-guardar:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+.btn-guardar:hover:not(:disabled) {
+  background-color: #E91E63;
 }

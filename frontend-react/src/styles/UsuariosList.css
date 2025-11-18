@@ -27,7 +27,7 @@
 }
 
 .paginacion-controles button {
-  background-color: #142759; 
+  background-color: var(--color-principal); 
   color: white;
   border: none;
   padding: 8px 12px;
@@ -37,7 +37,7 @@
 }
 
 .paginacion-controles button:hover {
-  background-color: #1f3a8a;
+  background-color: var(--color-texto-secundario);
 }
 
 .paginacion-controles button:disabled {

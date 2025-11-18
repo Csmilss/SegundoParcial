@@ -15,14 +15,14 @@
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: 10px;
-}
+} 
 .card-text {
   margin-bottom: 5px;
   color: #555;
 }
 .card-button {
   display: inline-block;
-  background-color: #142759;
+  background-color: var(--color-principal);
   color: white;
   padding: 8px 12px;
   text-align: center;
@@ -31,5 +31,5 @@
   margin-top: 10px;
 }
 .card-button:hover {
-  background-color: #1f3a8a;
+  background-color: var(--color-texto-secundario);
 }

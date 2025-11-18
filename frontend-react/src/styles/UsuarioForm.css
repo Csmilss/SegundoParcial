@@ -54,7 +54,7 @@
 }
 
 .btn-nuevo {
-  background-color: #142759;
+  background-color: var(--color-principal);
   color: white;
   padding: 10px 15px;
   border: none;
@@ -62,8 +62,9 @@
   cursor: pointer;
   font-size: 1rem;
 }
+
 .btn-nuevo:hover {
-  background-color: #1f3a8a;
+  background-color: var(--color-texto-secundario);
 }
 
 .nuevo-usuario-control {

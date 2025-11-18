@@ -1,31 +1,36 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { get } from '../services/api.js';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
+// 1. Importamos 'post' y el nuevo formulario
+import { get, post } from '../services/api.js'; 
+import PublicacionForm from '../components/PublicacionForm.jsx'; 
 import Cargando from '../components/Cargando.jsx';
 import Alerta from '../components/Alerta.jsx';
 import '../styles/PublicacionesList.css'; 
-import { Link } from 'react-router-dom';
+import '../styles/PublicacionForm.css'; // 2. Importamos el CSS del form
 
 function Publicaciones() {
-  // estados
-  const { id } = useParams(); // ID del usuario (de /usuarios/:id/...)
-  const [publicaciones, setPublicaciones] = useState([]); // Lista original
+  // Estados
+  const { id } = useParams(); // ID del usuario
+  const [publicaciones, setPublicaciones] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // 1. Hook para sincronizar con la URL (?filtro=...&orden=...)
+  // Estados de filtro (igual que antes)
   const [searchParams, setSearchParams] = useSearchParams();
-
-  // Leemos los valores de la URL (o usamos '' y 'fecha_desc' por defecto)
   const filtro = searchParams.get('filtro') || '';
   const orden = searchParams.get('orden') || 'fecha_desc';
 
-  // carga de publicaciones del usuario
+  // 3. Nuevos estados para el formulario
+  const [showForm, setShowForm] = useState(false);
+  const [estaGuardando, setEstaGuardando] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0); // Para forzar recarga
+
+  // Carga de publicaciones
   useEffect(() => {
     const fetchPublicaciones = async () => {
       setLoading(true);
       setError(null);
-      // 2. Hacemos UNA SOLA petición a la API
+      
       const resultado = await get(`/usuarios/${id}/publicaciones`);
       setLoading(false);
 
@@ -36,25 +41,20 @@ function Publicaciones() {
       }
     };
     fetchPublicaciones();
-  }, [id]); // Depende solo de 'id'
+  }, [id, refreshKey]); // 4. Añadimos refreshKey como dependencia
 
-  // filtrado y orden (en el cliente)
-  // 3. Usamos useMemo para optimizar
+  // Filtrado (igual que antes)
   const publicacionesFiltradas = useMemo(() => {
-    let pubs = [...publicaciones]; // Copiamos la lista
-
-    // 3.1. Aplicar Filtro (en cliente)
+    let pubs = [...publicaciones]; 
     if (filtro) {
       pubs = pubs.filter((p) =>
         p.titulo.toLowerCase().includes(filtro.toLowerCase()) ||
         p.cuerpo.toLowerCase().includes(filtro.toLowerCase())
       );
     }
-
-    // 3.2. Aplicar Orden (en cliente)
     switch (orden) {
       case 'fecha_asc':
-        pubs.sort((a, b) => a.id - b.id); // Asumimos id es cronológico
+        pubs.sort((a, b) => a.id - b.id); 
         break;
       case 'titulo_az':
         pubs.sort((a, b) => a.titulo.localeCompare(b.titulo));
@@ -64,42 +64,79 @@ function Publicaciones() {
         break;
       case 'fecha_desc':
       default:
-        pubs.sort((a, b) => b.id - a.id); // Por defecto
+        pubs.sort((a, b) => b.id - a.id); 
         break;
     }
     return pubs;
-  }, [publicaciones, filtro, orden]); // 4. Recalcula si cambia esto
+  }, [publicaciones, filtro, orden]);
 
-  // handlers para cambios en filtro y orden
+  // Handlers de filtro (igual que antes)
   const handleFiltroChange = (e) => {
     setSearchParams({ filtro: e.target.value, orden });
   };
-
   const handleOrdenChange = (e) => {
     setSearchParams({ filtro, orden: e.target.value });
   };
 
-  // renderizado
-  if (loading) return <Cargando />;
+  // 5. Nueva función para guardar la publicación
+  const handleSavePublicacion = async (data, limpiarForm) => {
+    setEstaGuardando(true);
+    setError(null);
+
+    // Añadimos el usuarioId (que lo tenemos de useParams)
+    const dataConUsuario = { ...data, usuarioId: id };
+
+    const resultado = await post('/publicaciones', dataConUsuario);
+    setEstaGuardando(false);
+
+    if (resultado.error) {
+      setError(resultado.mensaje); // Mostramos error
+    } else {
+      // Éxito
+      setShowForm(false); // Ocultamos el form
+      limpiarForm(); // Limpiamos los campos
+      setRefreshKey(k => k + 1); // Forzamos la recarga del useEffect
+    }
+  };
+
+
+  // Renderizado
+  if (loading && refreshKey === 0) return <Cargando />; // Solo el "Cargando" inicial
 
   return (
     <div className="publicaciones-container">
-      <h2>Publicaciones del Usuario {id}</h2>
+      <h2>Publicaciones del Vecino (ID: {id})</h2>
 
+      {/* 6. Alerta de Errores (ahora sirve para GET y POST) */}
       <Alerta mensaje={error} />
 
-      {/* 5. Controles de Filtro y Orden */}
+      {/* 7. Lógica para mostrar Formulario o Botón "Crear" */}
+      {showForm ? (
+        <PublicacionForm 
+          onGuardar={handleSavePublicacion}
+          onCancelar={() => setShowForm(false)}
+          estaCargando={estaGuardando}
+        />
+      ) : (
+        <div className="nuevo-post-control">
+          <button className="btn-nuevo" onClick={() => setShowForm(true)}>
+            Crear Nuevo Post
+          </button>
+        </div>
+      )}
+
+      {/* Controles de Filtro (igual que antes) */}
       <div className="filtros-controles">
         <input
           type="text"
           placeholder="Filtrar por título o cuerpo..."
           className="filtro-input"
-          value={filtro} // Controlado por la URL
+          value={filtro}
           onChange={handleFiltroChange}
         />
         <select
           className="orden-select"
-          value={orden} // Controlado por la URL
+          value={orden}
           onChange={handleOrdenChange}
         >
           <option value="fecha_desc">Más recientes primero</option>
@@ -108,15 +145,17 @@ function Publicaciones() {
           <option value="titulo_za">Título (Z-A)</option>
         </select>
       </div>
+      
+      {/* 8. Feedback de carga (para recargas) */}
+      {loading && refreshKey > 0 && <Cargando />}
 
-      {/* 6. Lista de Publicaciones */}
+      {/* Lista de Publicaciones (igual que antes) */}
       <div className="publicaciones-lista">
         {!loading && publicacionesFiltradas.length === 0 ? (
           <div className="alerta-info">Sin publicaciones para mostrar</div>
         ) : (
           publicacionesFiltradas.map((pub) => (
             <div key={pub.id} className="publicacion-item">
-              {/* Convertimos el h3 en un Link */}
               <h3>
                 <Link to={`/publicaciones/${pub.id}`} className="publicacion-link">
                   {pub.titulo}

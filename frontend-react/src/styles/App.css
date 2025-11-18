@@ -1,10 +1,19 @@
+:root {
+  --color-principal: #6D4C41; /* Marrón Oscuro (para navbar, botones) */
+  --color-secundario: #F48FB1; /* Rosa (para acentos, links, botones) */
+  --color-fondo: #FDF8F5; /* Un beige/rosa muy pálido */
+  --color-tarjeta: #FFFFFF; /* Blanco para las tarjetas */
+  --color-texto-principal: #3E2723; /* Marrón muy oscuro */
+  --color-texto-secundario: #8D6E63; /* Marrón claro */
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #d9dee4; 
-  color: #333;
+  background-color: var(--color-fondo); 
+  color: var(--color-texto-principal);
 }
 
 *, *::before, *::after {

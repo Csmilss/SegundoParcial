@@ -54,7 +54,8 @@
 
 .btn-accion {
   display: inline-block; 
-  background-color: #142759;
+  background-color: var(--color-secundario); 
+  font-weight: bold;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -67,5 +68,5 @@
 }
 
 .btn-accion:hover {
-  background-color: #1f3a8a;
+  background-color: #E91E63;
 }

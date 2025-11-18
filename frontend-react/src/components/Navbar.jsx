@@ -6,12 +6,12 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-container">
         <NavLink className="navbar-brand" to="/">
-          Mini-Red Social
+          Nueva Cordoba Conecta
         </NavLink>
         <ul className="navbar-nav">
           <li className="nav-item">
             <NavLink className="nav-link" to="/">
-              FRC Conecta
+              Inicio
             </NavLink>
           </li>
           <li className="nav-item">

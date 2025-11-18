@@ -65,7 +65,7 @@
 
 .publicacion-link {
   text-decoration: none;
-  color: #142759;
+  color: var(--color-principal);
 }
 .publicacion-link:hover {
   text-decoration: underline;
